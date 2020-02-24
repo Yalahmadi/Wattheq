@@ -1,9 +1,8 @@
 package com.ELM.stProject.Wattheq.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Certs")
 @Table
@@ -24,14 +23,39 @@ public class Cert {
     private String certStatus;
     @Column(name = "CertDocument")
     private String certDocument;
-    @Column(name = "UserID")
-    private int userID;
-    @Column(name = "OrgID")
-    private int orgID;
+
+
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "UserID")
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "OrganizationID")
+    private Orga cOrga;
+
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+
+    @JoinTable(
+            name = "certificates_shareds",
+
+            joinColumns = {@JoinColumn(name = "CertID")},
+
+            inverseJoinColumns = {@JoinColumn(name = "sharedID")}
+    )
+
+
+
+
+
+
+    private Set<Shared> shareds = new HashSet<Shared>();
 
     public Cert() {}
 
-    public Cert(int certID, String certName, String certType, String certDescription, String certDate, String certStatus, String certDocument, int userID, int orgID) {
+    public Cert(int certID, String certName, String certType, String certDescription, String certDate, String certStatus, String certDocument) {
         this.certID = certID;
         this.certName = certName;
         this.certType = certType;
@@ -39,8 +63,6 @@ public class Cert {
         this.certDate = certDate;
         this.certStatus = certStatus;
         this.certDocument = certDocument;
-        this.userID = userID;
-        this.orgID = orgID;
     }
 
     public int getCertID() {
@@ -99,19 +121,27 @@ public class Cert {
         this.certDocument = certDocument;
     }
 
-    public int getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getOrgID() {
-        return orgID;
+    public Orga getcOrga() {
+        return cOrga;
     }
 
-    public void setOrgID(int orgID) {
-        this.orgID = orgID;
+    public void setcOrga(Orga cOrga) {
+        this.cOrga = cOrga;
+    }
+
+    public Set<Shared> getShareds() {
+        return shareds;
+    }
+
+    public void setShareds(Set<Shared> shareds) {
+        this.shareds = shareds;
     }
 }

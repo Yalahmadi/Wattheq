@@ -1,16 +1,13 @@
 package com.ELM.stProject.Wattheq.Model;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "Users")
 public class User {
-
-
-
-
-
 
     @Id
     @Column(name = "UserID")
@@ -27,14 +24,24 @@ public class User {
     private String password;
     @Column(name = "NationalID")
     private int nationalID;
-    @Column(name = "AuthID")
-    private int authID;
-    @Column(name = "OrgID")
-    private int orgID;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AuthID")
+    private Auth auth;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "OrgID")
+    private Orga userOrga;
+
+
+    @OneToMany(mappedBy = "userShareds", cascade = CascadeType.ALL)
+    private List<Shared> shareds = new ArrayList<>();
 
     public User() {}
 
-    public User(int userID, String fullName, String dob, int phoneNumber, String email, String password, int nationalID, int authID, int orgID) {
+    public User(int userID, String fullName, String dob, int phoneNumber, String email, String password, int nationalID) {
         this.userID = userID;
         this.fullName = fullName;
         this.dob = dob;
@@ -42,8 +49,30 @@ public class User {
         this.email = email;
         this.password = password;
         this.nationalID = nationalID;
-        this.authID = authID;
-        this.orgID = orgID;
+    }
+
+    public Auth getAuth() {
+        return auth;
+    }
+
+    public void setAuth(Auth auth) {
+        this.auth = auth;
+    }
+
+    public Orga getUserOrga() {
+        return userOrga;
+    }
+
+    public void setUserOrga(Orga userOrga) {
+        this.userOrga = userOrga;
+    }
+
+    public List<Shared> getShareds() {
+        return shareds;
+    }
+
+    public void setShareds(List<Shared> shareds) {
+        this.shareds = shareds;
     }
 
     public int getUserID() {
@@ -89,7 +118,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -102,19 +130,4 @@ public class User {
         this.nationalID = nationalID;
     }
 
-    public int getAuthID() {
-        return authID;
-    }
-
-    public void setAuthID(int authID) {
-        this.authID = authID;
-    }
-
-    public int getOrgID() {
-        return orgID;
-    }
-
-    public void setOrgID(int orgID) {
-        this.orgID = orgID;
-    }
 }

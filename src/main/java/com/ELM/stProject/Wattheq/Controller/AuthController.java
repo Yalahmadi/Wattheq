@@ -4,12 +4,15 @@ import com.ELM.stProject.Wattheq.Model.Auth;
 import com.ELM.stProject.Wattheq.Service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+
 
 
 @RestController
 @RequestMapping(value = "/Auths")
+
+
 public class AuthController {
 
     @Autowired
@@ -44,4 +47,7 @@ public class AuthController {
     public void deleteAllAuths() {
         authService.deleteAllAuths();
     }
+
 }
+
+

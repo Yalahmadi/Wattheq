@@ -1,9 +1,8 @@
 package com.ELM.stProject.Wattheq.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Auth")
 @Table
@@ -17,12 +16,24 @@ public class Auth {
     @Column(name = "AuthDescription")
     private String authDescription;
 
+    @OneToMany(mappedBy = "auth" , cascade = CascadeType.ALL)
+    private List<User> users = new ArrayList<>();
+
+
     public Auth() {}
 
     public Auth(int authID, String authName, String authDescription) {
         this.authID = authID;
         this.authName = authName;
         this.authDescription = authDescription;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public int getAuthID() {
@@ -51,6 +62,9 @@ public class Auth {
 
     public void setNationalID(int authID) {
     }
+
+
+
 }
 
 

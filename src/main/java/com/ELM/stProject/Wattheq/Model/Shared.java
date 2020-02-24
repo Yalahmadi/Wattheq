@@ -1,9 +1,8 @@
 package com.ELM.stProject.Wattheq.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "Shared")
 @Table
@@ -12,8 +11,6 @@ public class Shared {
     @Id
     @Column(name = "SharedID")
     private int sharedID;
-    @Column(name = "UserID")
-    private int userID;
     @Column(name = "CertificateID")
     private int certificateID;
     @Column(name = "SharedDate")
@@ -21,11 +18,19 @@ public class Shared {
     @Column(name = "SharedUrl")
     private String sharedUrl;
 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "UserID")
+    private User userShareds;
+
+    @ManyToMany(mappedBy = "shareds" , cascade = {CascadeType.ALL} , targetEntity = Cert.class)
+    private Set<Cert> certs = new HashSet<Cert>();
+
+
     public Shared() {}
 
-    public Shared(int sharedID, int userID, int certificateID, String sharedDate, String sharedUrl) {
+    public Shared(int sharedID, int certificateID, String sharedDate, String sharedUrl ) {
         this.sharedID = sharedID;
-        this.userID = userID;
         this.certificateID = certificateID;
         this.sharedDate = sharedDate;
         this.sharedUrl = sharedUrl;
@@ -37,14 +42,6 @@ public class Shared {
 
     public void setSharedID(int sharedID) {
         this.sharedID = sharedID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public int getCertificateID() {
@@ -69,5 +66,21 @@ public class Shared {
 
     public void setSharedUrl(String sharedUrl) {
         this.sharedUrl = sharedUrl;
+    }
+
+    public User getUserId() {
+        return userShareds;
+    }
+
+    public void setUserId(User userId) {
+        this.userShareds = userId;
+    }
+
+    public Set<Cert> getCerts() {
+        return certs;
+    }
+
+    public void setCerts(Set<Cert> certs) {
+        this.certs = certs;
     }
 }
