@@ -1,5 +1,7 @@
 package com.ELM.stProject.Wattheq.SecurityDemo;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,6 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select email, password, enabled from [wathq].[dbo].[users] WHERE email=? ")
-                .authoritiesByUsernameQuery("select email,authid from [wathq].[dbo].[users] where email = ?")
+                .authoritiesByUsernameQuery("select email,auth_name from [wathq].[dbo].[users] where email =?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }}
+
+
+

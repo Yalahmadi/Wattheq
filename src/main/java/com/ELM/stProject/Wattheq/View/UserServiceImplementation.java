@@ -19,7 +19,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User addInd(User user) {
       //System.out.print(new BCryptPasswordEncoder());
-       user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+      // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
         return repo.save(user);
     }

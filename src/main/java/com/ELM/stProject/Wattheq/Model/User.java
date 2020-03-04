@@ -1,5 +1,7 @@
 package com.ELM.stProject.Wattheq.Model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,6 @@ public class User {
     @Column(name = "NationalID")
     private int nationalID;
     @Column(name = "enabled")
-
     private boolean enable=true;
 
     public int getUserID() {
@@ -125,7 +126,8 @@ public class User {
         return password;
     }
     public void setPassword(String password) {
-        this.password = password;
+
+        //this.password = user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
     }
 
     public int getNationalID() {

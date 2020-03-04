@@ -2,6 +2,7 @@ package com.ELM.stProject.Wattheq.Controller;
 import com.ELM.stProject.Wattheq.Model.User;
 import com.ELM.stProject.Wattheq.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,9 @@ public class UserController {
 
     @PostMapping(value = "/AddInd")
     public User addInd(@RequestBody User user) {
+      // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userService.addInd(user);
+
     }
 
     @GetMapping(value = "/GetAllUsers")
