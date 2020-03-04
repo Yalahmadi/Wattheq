@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/Certs")
-public class CertController {
+public class   CertController {
 
     @Autowired
     private CertService certService;

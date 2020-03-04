@@ -8,9 +8,10 @@ import java.util.List;
 @Table
 public class Auth {
 
-    @Id
+
     @Column(name = "AuthID")
     private int authID;
+    @Id
     @Column(name = "AuthName")
     private String authName;
     @Column(name = "AuthDescription")

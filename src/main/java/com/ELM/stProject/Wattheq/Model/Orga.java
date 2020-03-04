@@ -10,6 +10,7 @@ public class Orga {
 
     @Id
     @Column(name = "OrganizationID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int orgaID;
     @Column(name = "OrganizationName")
     private String orgaName;
@@ -21,10 +22,6 @@ public class Orga {
 
     @OneToMany(mappedBy = "cOrga" , cascade = CascadeType.ALL , targetEntity = Cert.class)
     private List<Cert> certs = new ArrayList<>();
-
-
-
-
 
     public Orga() {}
 
@@ -63,13 +60,6 @@ public class Orga {
         return orgaContactNumber;
     }
 
-    public int getOrgaID() {
-        return orgaID;
-    }
-
-    public void setOrgaID(int orgaID) {
-        this.orgaID = orgaID;
-    }
 
     public String getOrgaName() {
         return orgaName;
@@ -77,14 +67,6 @@ public class Orga {
 
     public void setOrgaName(String orgaName) {
         this.orgaName = orgaName;
-    }
-
-    public String getOrgaAddress() {
-        return orgaAddress;
-    }
-
-    public void setOrgaAddress(String orgaAddress) {
-        this.orgaAddress = orgaAddress;
     }
 
     public String getOrgaContactNumber() {

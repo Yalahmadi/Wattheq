@@ -1,12 +1,11 @@
 package com.ELM.stProject.Wattheq.Controller;
-
 import com.ELM.stProject.Wattheq.Model.User;
 import com.ELM.stProject.Wattheq.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "/Users")
@@ -15,9 +14,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/AddUser")
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    @RequestMapping(value = "/SignUp")
+    public String viewPg(){
+        return "SignUp";
+    }
+
+    @PostMapping(value = "/AddInd")
+    public User addInd(@RequestBody User user) {
+        return userService.addInd(user);
     }
 
     @GetMapping(value = "/GetAllUsers")
@@ -44,4 +48,9 @@ public class UserController {
     public void deleteAllUsers() {
         userService.deleteAllUsers();
     }
-}
+    }
+
+
+
+
+

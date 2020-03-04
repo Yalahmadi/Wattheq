@@ -10,6 +10,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "UserID")
     private int userID;
     @Column(name = "FullName")
@@ -24,10 +25,29 @@ public class User {
     private String password;
     @Column(name = "NationalID")
     private int nationalID;
+    @Column(name = "enabled")
+
+    private boolean enable=true;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "AuthID")
+    @JoinColumn(name = "AuthName")
     private Auth auth;
 
 
@@ -38,6 +58,8 @@ public class User {
 
     @OneToMany(mappedBy = "userShareds", cascade = CascadeType.ALL)
     private List<Shared> shareds = new ArrayList<>();
+
+
 
     public User() {}
 
@@ -59,28 +81,12 @@ public class User {
         this.auth = auth;
     }
 
-    public Orga getUserOrga() {
-        return userOrga;
-    }
-
-    public void setUserOrga(Orga userOrga) {
-        this.userOrga = userOrga;
-    }
-
     public List<Shared> getShareds() {
         return shareds;
     }
 
     public void setShareds(List<Shared> shareds) {
         this.shareds = shareds;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getFullName() {
@@ -129,5 +135,18 @@ public class User {
     public void setNationalID(int nationalID) {
         this.nationalID = nationalID;
     }
+
+
+    public User(Orga userOrga) {
+        this.userOrga = userOrga;
+    }
+    public Orga getUserOrga() {
+        return userOrga;
+    }
+
+    public void setUserOrga(Orga userOrga) {
+        this.userOrga = userOrga;
+    }
+
 
 }
