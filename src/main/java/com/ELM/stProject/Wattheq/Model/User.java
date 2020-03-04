@@ -38,13 +38,19 @@ public class User {
         this.userID = userID;
     }
 
+
+
     public boolean isEnable() {
+
         return enable;
     }
+
 
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
+
+
 
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -64,7 +70,7 @@ public class User {
 
     public User() {}
 
-    public User(int userID, String fullName, String dob, int phoneNumber, String email, String password, int nationalID) {
+    public User(int userID, String fullName, String dob, int phoneNumber, String email, String password, int nationalID , boolean enable) {
         this.userID = userID;
         this.fullName = fullName;
         this.dob = dob;
@@ -72,6 +78,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.nationalID = nationalID;
+        this.enable = enable;
     }
 
     public Auth getAuth() {
@@ -127,7 +134,7 @@ public class User {
     }
     public void setPassword(String password) {
 
-        //this.password = user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+
     }
 
     public int getNationalID() {

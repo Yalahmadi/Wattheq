@@ -1,9 +1,11 @@
 package com.ELM.stProject.Wattheq.Controller;
+
+
+import com.ELM.stProject.Wattheq.DTO.UserDTO;
 import com.ELM.stProject.Wattheq.Model.User;
 import com.ELM.stProject.Wattheq.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +30,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/GetAllUsers")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
+    public List<UserDTO> getAllUsers() { return userService.getAllUsers(); }
 
     @GetMapping(value = "/GetUser/{userID}")
-    public User getUser(@PathVariable("userID") int userID) {
+    public UserDTO getUser(@PathVariable("userID") int userID) {
         return userService.getUser(userID);
     }
 
