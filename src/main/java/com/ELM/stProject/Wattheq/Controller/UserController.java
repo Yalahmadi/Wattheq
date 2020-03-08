@@ -5,9 +5,9 @@ import com.ELM.stProject.Wattheq.DTO.UserDTO;
 import com.ELM.stProject.Wattheq.Model.User;
 import com.ELM.stProject.Wattheq.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,12 +22,21 @@ public class UserController {
         return "SignUp";
     }
 
-    @PostMapping(value = "/AddInd")
-    public User addInd(@RequestBody User user) {
-      // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        return userService.addInd(user);
 
+
+//    @PostMapping(value = "/AddInd")
+//    public User addInd(@RequestBody User user) {
+//      // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+//        return userService.addInd(user);
+//
+//    }
+
+    @RequestMapping(value = "/AddInd", method = RequestMethod.POST)
+    public String addInd( @RequestBody User user) {
+        userService.addInd(user);
+        return "Added Successfully";
     }
+
 
     @GetMapping(value = "/GetAllUsers")
     public List<UserDTO> getAllUsers() { return userService.getAllUsers(); }

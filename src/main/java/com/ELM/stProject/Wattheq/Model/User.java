@@ -1,8 +1,10 @@
 package com.ELM.stProject.Wattheq.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +17,36 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "UserID")
     private int userID;
+
+    //------------
     @Column(name = "FullName")
+//    @NotNull(message = "First name , Last name is required")
+//    //@Size(min = 3, max = 20)
     private String fullName;
+    //------------
+
     @Column(name = "DateOfBirth")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String dob;
+    //--------------
     @Column(name = "PhoneNumber")
     private int phoneNumber;
+
+    //---------------
     @Column(name = "Email")
+//    @Email(message = "Enter a valid email address.")
+//    @Pattern(regexp=".+@.+\\.[a-z]+")
+//    @NotNull(message = "Email is required")
     private String email;
-    @Column(name = "Password")
+    //---------------
+
+//    @GeneratedValue(strategy =GenerationType.AUTO )
+    @Column(name = "password")
     private String password;
+    //---------
     @Column(name = "NationalID")
     private int nationalID;
+    //------------------
     @Column(name = "enabled")
     private boolean enable=true;
 
@@ -50,8 +70,13 @@ public class User {
         this.enable = enable;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
-
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "AuthName")
@@ -129,13 +154,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-
-
-    }
 
     public int getNationalID() {
         return nationalID;

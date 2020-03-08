@@ -9,7 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 @Service
@@ -22,9 +22,8 @@ public class UserServiceImplementation implements UserService {
 
 
     @Override
-    public User addInd( User user) {
-
-        //user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+    public User addInd(User user) {
+       user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
         return repo.save(user);
     }
